@@ -1,1 +1,1 @@
-php yii serve
+web: php yii serve
