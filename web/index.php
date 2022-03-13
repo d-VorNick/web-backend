@@ -14,7 +14,7 @@ $config = require __DIR__ . '/../config/web.php';
 (new yii\web\Application($config))->run();
 
 $wsWorker = new Worker('websocket://0.0.0.0:2346');
-$wsWorker->count = 1;
+$wsWorker->count = 4;
 
 $wsWorker->onConnect = function($connection) {
     echo 'New connection \n';
