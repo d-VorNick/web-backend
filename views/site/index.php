@@ -51,3 +51,5 @@ $this->title = 'My Yii Application';
 
     </div>
 </div>
+
+<button id="test">test</button>

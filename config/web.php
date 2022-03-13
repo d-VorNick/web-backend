@@ -43,19 +43,20 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                '<action:\w+>' => 'site/<action>',
+                '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];
 
-/*if (YII_ENV_DEV) {
+if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
@@ -70,6 +71,6 @@ $config = [
         // uncomment the following to add your IP if you are not connecting from localhost.
         //'allowedIPs' => ['127.0.0.1', '::1'],
     ];
-}*/
+}
 
 return $config;

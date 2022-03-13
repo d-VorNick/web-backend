@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\SignupForm;
+use app\models\User;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -36,6 +38,27 @@ class SiteController extends Controller
                 ],
             ],
         ];
+    }
+
+    public function beforeAction($action)
+    {
+        if (in_array($action->id, ['contact', 'index', 'about', ])) {
+            if (!Yii::$app->user->isGuest) {
+                if (!isset($_COOKIE['_identity'])) {
+                    Yii::$app->session->setFlash('end_of_session', "Сессия истекла");
+                    $this->actionLogout();
+                }
+            } else {
+
+                if (Yii::$app->request->cookies->get('_identity')) {
+                    $identity = str_replace(['[', ']'], '', Yii::$app->request->cookies->get('_identity')->value);
+                    $id = explode(',', $identity)[0];
+                    $user = User::findIdentity($id);
+                    Yii::$app->user->login($user,  3600*24*30);
+                }
+            }
+        }
+        return parent::beforeAction($action);
     }
 
     /**
@@ -98,6 +121,50 @@ class SiteController extends Controller
         return $this->goHome();
     }
 
+    public function actionOpenSignup() {
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+
+        $model = new SignupForm();
+        if ($model->load(Yii::$app->request->post())) {
+            if (!$model->validate()) {
+                Yii::$app->session->setFlash('bad-data', "Длина логина и пароля должна не более 45 символов");
+                return $this->redirect('login');
+            }
+            $checkLogin = $model->checkLogin();
+            if ($checkLogin === false) {
+                $this->redirect('/error/database');
+            }
+            if ($checkLogin > 0) {
+                Yii::$app->session->setFlash('used', "Пользователь " . $model->username . " уже зарегистрирован");
+                return $this->redirect('login');
+            }
+
+            if (!$model->register()) {
+                $this->redirect('/error/database');
+            }
+            Yii::$app->session->setFlash('success', "Пользователь " . $model->username . " был успешно зарегистрирован");
+            return $this->redirect('login');
+        }
+
+        return $this->renderAjax('signup', [
+            'model' => $model,
+        ]);
+    }
+
+    public function actionSignup(){
+        if (!Yii::$app->user->isGuest) {
+            return $this->goHome();
+        }
+
+        /*$model = new SignupForm();
+        return $this->renderAjax('signup', [
+            'model' => $model,
+        ]);*/
+    }
+
     /**
      * Displays contact page.
      *
@@ -124,5 +191,11 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionTest() {
+        $q = "SELECT username FROM asdsds WHERE username=asds;";
+        return Yii::$app->db->createCommand($q)->queryAll();
+
     }
 }
