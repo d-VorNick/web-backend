@@ -17,6 +17,7 @@
 
 });*/
 
+
 $(document).ready(function($) {
     $('#signup-btn').click(function() {
         $.ajax({
@@ -50,24 +51,7 @@ $(document).ready(function($) {
         }
     });
 
-    $('#submit-signup').submit(function(e) {
-        e.preventDefault();
-    });
-
-    $('#test').click(function(e) {
-        $.ajax({
-            'method': 'POST',
-            'url': '/site/test',
-            'cache': false,
-            'contentType': false,
-            'processData': false,
-
-            'success': function(response) {
-            },
-            'error': function(response) {
-                alert(response.responseText);
-            }
-        });
-    });
 
 });
+
+

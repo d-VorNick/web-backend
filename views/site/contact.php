@@ -6,8 +6,7 @@
 
 use yii\bootstrap4\Html;
 
-$this->title = 'Contact';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Игра';
 ?>
 <div class="site-contact">
     <h1><?= Html::encode($this->title) ?></h1>

@@ -58,4 +58,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 </div>
 
-<?= $this->render('./content/modal');
+<?= $this->render('./content/modal'); ?>

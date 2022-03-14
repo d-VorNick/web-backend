@@ -28,25 +28,25 @@ AppAsset::register($this);
 <header>
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
+        'brandLabel' => 'Семестр 6',
         'brandUrl' => Yii::$app->homeUrl,
         'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+            'class' => 'navbar navbar-expand-md fixed-top',
         ],
     ]);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav'],
         'items' => [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
+            ['label' => 'Главная', 'url' => ['/site/index']],
+            ['label' => 'Лабы', 'url' => ['/site/about']],
+            ['label' => 'Игра', 'url' => ['/site/contact']],
             Yii::$app->user->isGuest ? (
-                ['label' => 'Login', 'url' => ['/site/login']]
+                ['label' => 'Войти', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post', ['class' => 'form-inline'])
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выйти (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link logout']
                 )
                 . Html::endForm()
@@ -70,8 +70,15 @@ AppAsset::register($this);
 
 <footer class="footer mt-auto py-3 text-muted">
     <div class="container">
-        <p class="float-left">&copy; My Company <?= date('Y') ?></p>
-        <p class="float-right"><?= Yii::powered() ?></p>
+        <p class="float-left">&copy; Воронин Никита М33041 <?= date('Y') ?></p>
+        <div class="footer__contacts">
+            <aside>
+                <ul class="float-right">
+                    <li><a href="https://vk.com/id516018519" target="_blank">Вконтакте</a></li>
+                    <li><a href="https://github.com/d-VorNick" target="_blank">GitHub</a></li>
+                </ul>
+            </aside>
+        </div>
     </div>
 </footer>
 
@@ -79,7 +86,3 @@ AppAsset::register($this);
 </body>
 </html>
 <?php $this->endPage() ?>
-
-<div id="signup">
-
-</div>

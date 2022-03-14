@@ -11,6 +11,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\AboutService;
 
 class SiteController extends Controller
 {
@@ -49,12 +50,13 @@ class SiteController extends Controller
                     $this->actionLogout();
                 }
             } else {
-
                 if (Yii::$app->request->cookies->get('_identity')) {
                     $identity = str_replace(['[', ']'], '', Yii::$app->request->cookies->get('_identity')->value);
                     $id = explode(',', $identity)[0];
                     $user = User::findIdentity($id);
                     Yii::$app->user->login($user,  3600*24*30);
+                } else {
+                    $this->redirect('login');
                 }
             }
         }
@@ -172,15 +174,8 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        $model = new ContactForm();
-        if ($model->load(Yii::$app->request->post()) && $model->contact(Yii::$app->params['adminEmail'])) {
-            Yii::$app->session->setFlash('contactFormSubmitted');
 
-            return $this->refresh();
-        }
-        return $this->render('contact', [
-            'model' => $model,
-        ]);
+        return $this->render('contact');
     }
 
     /**
@@ -190,12 +185,17 @@ class SiteController extends Controller
      */
     public function actionAbout()
     {
-        return $this->render('about');
+        $model = new AboutService();
+        $data = $model->showLabs();
+        $request['limit'] = 5;
+        $request['page'] = 0;
+        if (Yii::$app->request->post()) {
+            $request = Yii::$app->request->post();
+        }
+        return $this->render('about', [
+            'data' => $data,
+            'request' => $request,
+        ]);
     }
 
-    public function actionTest() {
-        $q = "SELECT username FROM asdsds WHERE username=asds;";
-        return Yii::$app->db->createCommand($q)->queryAll();
-
-    }
 }

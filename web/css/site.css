@@ -132,3 +132,34 @@ a.desc:after {
     top: 0;
     left: 0;
 }
+
+.navbar {
+    background-color: black;
+    color: green;
+}
+
+.navbar > .container > a {
+    color: green;
+}
+
+.nav-link {
+    color: green;
+}
+
+.navbar-toggler-icon {
+    background-color: green;
+}
+
+.footer__contacts_links {
+    list-style-type: none;
+    padding: 0;
+}
+
+.footer__contacts_links a {
+    color: #FFF;
+    text-decoration: none;
+}
+
+.footer__contacts_links a:visited {
+    color: #FFF;
+}
