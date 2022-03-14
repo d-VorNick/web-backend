@@ -13,8 +13,8 @@ $config = require __DIR__ . '/../config/web.php';
 
 (new yii\web\Application($config))->run();
 
-$wsWorker = new Worker('websocket://0.0.0.0/contact');
-//$wsWorker->count = 1;
+$wsWorker = new Worker('websocket://web-2sem.herokuapp.com/contact');
+$wsWorker->count = 1;
 
 $wsWorker->onConnect = function($connection) {
     echo 'New connection \n';
