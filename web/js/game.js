@@ -1,7 +1,7 @@
 const bodyElement = document.getElementById('wrapper');
 const unit = document.getElementById('unit');
 
-const ws = new WebSocket('wss://' + location.hostname + '/contact');
+const ws = new WebSocket('wss://' + location.hostname + ':3000');
 
 document.addEventListener('keyup', event => {
     let top = unit.style.top ? unit.style.top : 0;
@@ -9,7 +9,6 @@ document.addEventListener('keyup', event => {
     const step = 5;
 
     if (event.code === 'ArrowUp') {
-
         unit.style.top = parseInt(top) - step + 'px';
     } else if (event.code === 'ArrowDown') {
         unit.style.top = parseInt(top) + step + 'px';

@@ -12,7 +12,7 @@ class AboutService
 
     public function showLabs()
     {
-        $q = 'SELECT name, min, max, week FROM labs';
+        $q = "SELECT name, min, max, week FROM labs";
         $result = Yii::$app->db->createCommand($q)->queryAll();
         return $result;
 

@@ -174,7 +174,6 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-
         return $this->render('contact');
     }
 

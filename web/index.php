@@ -13,8 +13,10 @@ $config = require __DIR__ . '/../config/web.php';
 
 (new yii\web\Application($config))->run();
 
-$wsWorker = new Worker('websocket://web-2sem.herokuapp.com/contact');
-$wsWorker->count = 1;
+$wsWorker = new Worker('https://0.0.0.0:3000');
+$wsWorker->count = 4;
+
+
 
 $wsWorker->onConnect = function($connection) {
     echo 'New connection \n';
@@ -31,3 +33,18 @@ $wsWorker->onClose = function($connection) {
 };
 
 Worker::runAll();
+
+/*$socketObject = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
+$bindToIP = socket_bind($socketObject, '127.0.0.1', '2345');
+if (!$bindToIP) {
+    die(socket_strerror());
+}
+$listen = socket_listen($socketObject);
+while (True) {
+$connectionSuccess = socket_accept($socketObject);
+if ($connectionSuccess == false) {
+
+} else {
+    echo socket_strerror();
+}
+}*/

@@ -15,6 +15,5 @@ $this->title = 'Игра';
 
         </div>
     </div>
-
 </div>
 <script src="js/game.js"></script>
