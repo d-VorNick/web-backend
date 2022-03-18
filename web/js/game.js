@@ -1,7 +1,8 @@
 const bodyElement = document.getElementById('wrapper');
 const unit = document.getElementById('unit');
 
-const ws = new WebSocket('wss://' + location.hostname);
+const ws = new WebSocket('wss://' + location.hostname + ':2346');
+
 
 document.addEventListener('keyup', event => {
     let top = unit.style.top ? unit.style.top : 0;
