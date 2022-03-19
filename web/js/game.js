@@ -1,7 +1,7 @@
 const bodyElement = document.getElementById('wrapper');
 const unit = document.getElementById('unit');
 
-const ws = new WebSocket('wss://web-2sem.herokuapp.com:2346');
+const ws = new WebSocket('wss://localhost');
 
 
 document.addEventListener('keyup', event => {
