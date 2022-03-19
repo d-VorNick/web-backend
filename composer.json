@@ -20,7 +20,8 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
         "workerman/workerman": "^4.0",
         "ext-sockets": "*",
-        "ext-json": "*"
+        "ext-json": "*",
+        "ext-pcntl": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
