@@ -1,2 +1,1 @@
-web: vendor/bin/heroku-php-apache2 web/
-socket: php server.php start
+web: vendor/bin/heroku-php-apache2 web/ & php server.php start

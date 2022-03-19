@@ -1,7 +1,7 @@
 <?php
 use Workerman\Worker;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/vendor/autoload.php';
 
 $wsWorker = new Worker('websocket://0.0.0.0:8443');
 $wsWorker->count = 1;
