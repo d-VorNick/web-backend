@@ -21,7 +21,7 @@
         "workerman/workerman": "^4.0",
         "ext-sockets": "*",
         "ext-json": "*",
-        "ext-pcntl": "*"
+        "ext-pcntl": "8.1.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
