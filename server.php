@@ -3,7 +3,7 @@ use Workerman\Worker;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-$wsWorker = new Worker('websocket://web-2sem.herokuapp.com:2346');
+$wsWorker = new Worker('tcp://0.0.0.0:2346');
 $wsWorker->count = 1;
 
 
