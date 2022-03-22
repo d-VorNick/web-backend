@@ -7,8 +7,8 @@
 use yii\bootstrap4\ActiveForm;
 use yii\bootstrap4\Html;
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Вход';
+
 ?>
 <?php if( Yii::$app->session->hasFlash('used') ): ?>
     <div class="alert alert-success alert-dismissible" role="alert">
@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="site-login">
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
+    <p>Заполните данные поля для входа:</p>
 
     <?php $form = ActiveForm::begin([
         'id' => 'login-form',
@@ -38,13 +38,13 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Логин') ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
         <?= $form->field($model, 'rememberMe')->checkbox([
             'template' => "<div class=\"offset-lg-1 col-lg-3 custom-control custom-checkbox\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
+        ])->label('Запомнить меня') ?>
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
