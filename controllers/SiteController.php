@@ -8,6 +8,7 @@ use Workerman\Worker;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
+use yii\web\Cookie;
 use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
@@ -46,7 +47,7 @@ class SiteController extends Controller
     {
         if (in_array($action->id, ['contact', 'index', 'about', ])) {
             if (!Yii::$app->user->isGuest) {
-                if (!isset($_COOKIE['_identity'])) {
+                if (!isset($_COOKIE['_identity']) & Yii::$app->request->cookies->getValue('remember') == 1) {
                     Yii::$app->session->setFlash('end_of_session', "Сессия истекла");
                     $this->actionLogout();
                 }
@@ -56,6 +57,11 @@ class SiteController extends Controller
                     $id = explode(',', $identity)[0];
                     $user = User::findIdentity($id);
                     Yii::$app->user->login($user,  3600*24*30);
+                    Yii::$app->request->cookies->readOnly = false;
+                    Yii::$app->request->cookies->add( new Cookie([
+                        'name' => 'remember',
+                        'value' => 1,
+                    ]));
                 } else {
                     $this->redirect('login');
                 }
@@ -103,6 +109,11 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            Yii::$app->request->cookies->readOnly = false;
+            Yii::$app->request->cookies->add( new Cookie([
+                'name' => 'remember',
+                'value' => $model->rememberMe ? 1 : 0,
+            ]));
             return $this->goBack();
         }
 
@@ -133,7 +144,7 @@ class SiteController extends Controller
         $model = new SignupForm();
         if ($model->load(Yii::$app->request->post())) {
             if (!$model->validate()) {
-                Yii::$app->session->setFlash('bad-data', "Длина логина и пароля должна не более 45 символов");
+                Yii::$app->session->setFlash('bad-data', "Длина логина и пароля должна быть не более 45 символов");
                 return $this->redirect('login');
             }
             $checkLogin = $model->checkLogin();
