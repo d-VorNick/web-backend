@@ -47,5 +47,4 @@ class SignupForm extends Model
         }
 
     }
-
 }
