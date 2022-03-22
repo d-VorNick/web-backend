@@ -29,7 +29,7 @@ $this->title = 'Семестр 6';
 
                 <p>Также мой проенкт есть на GitHub. Надеюсь я разберусь, как добавить его в организацию. Ссылка на репозиторий ниже.</p>
 
-                <p><a class="btn btn-outline-secondary" href="https://github.com/d-VorNick/web-progr-sem2" target="_blank">GitHub &raquo;</a></p>
+                <p><a class="btn btn-outline-secondary" href="https://github.com/d-VorNick/web-backend" target="_blank">GitHub &raquo;</a></p>
             </div>
             <div class="col-lg-4">
                 <h2>Задания</h2>
