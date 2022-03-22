@@ -51,6 +51,7 @@ $this->title = 'Вход';
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
+
     <?php ActiveForm::end(); ?>
 
     <button class="btn" id="signup-btn"> Нажмите сюда, если хотите создать аккаунт </button>
