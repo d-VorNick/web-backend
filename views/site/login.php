@@ -55,7 +55,6 @@ $this->title = 'Вход';
     <?php ActiveForm::end(); ?>
 
     <button class="btn" id="signup-btn"> Нажмите сюда, если хотите создать аккаунт </button>
-
 </div>
 
 <?= $this->render('./content/modal'); ?>
