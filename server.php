@@ -7,6 +7,7 @@ $wsWorker = new Worker('websocket://0.0.0.0:8443');
 $wsWorker->count = 1;
 
 
+
 $wsWorker->onConnect = function($connection) {
     echo 'New connection \n';
 };

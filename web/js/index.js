@@ -18,7 +18,7 @@
 });*/
 
 
-$(document).ready(function($) {
+$(document).ready(function() {
     $('#signup-btn').click(function() {
         $.ajax({
             method: 'GET',

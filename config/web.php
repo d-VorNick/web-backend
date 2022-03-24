@@ -48,6 +48,7 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'room/<id:[\d]+>' => 'room/index',
                 '<action:\w+>' => 'site/<action>',
                 '<controller:\w+>/<action:\w+>/' => '<controller>/<action>',
             ],

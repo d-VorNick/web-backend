@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\RoomService;
 use app\models\SignupForm;
 use app\models\User;
 use Workerman\Worker;
@@ -186,7 +187,11 @@ class SiteController extends Controller
      */
     public function actionContact()
     {
-        return $this->render('contact');
+        $model = new RoomService();
+        $data = $model->getData();
+        return $this->render('contact', [
+            'data' => $data,
+        ]);
     }
 
     /**

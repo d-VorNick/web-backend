@@ -163,3 +163,21 @@ a.desc:after {
 .footer__contacts_links a:visited {
     color: #FFF;
 }
+
+.rooms {
+    justify-content: space-around;
+}
+
+.card {
+    margin-bottom: 20px;
+    padding: 10px;
+    border-width: 2px;
+}
+
+.players {
+    justify-content: space-around;
+}
+
+.disabled {
+    background-color: gray !important;
+}
