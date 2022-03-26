@@ -24,8 +24,10 @@ $(document).ready(function() {
         $(this).addClass('disabled');
         let data = {
             id: id,
-            places: emptyPlaces
+            places: emptyPlaces,
+            location: 'rooms'
         };
+        let resp;
         ws.send(JSON.stringify(data));
         if (id == 1 || id == 2) {
             room = 1;
@@ -44,9 +46,11 @@ $(document).ready(function() {
 
 ws.onmessage = response => {
     let data = JSON.parse(response.data);
-    console.log(data);
-    $('#' + data.id).parents().parents().children().eq(1).text(data.places);
-    $('#' + data.id).addClass('disabled');
-    $('#' + data.id).text('Занято');
+    if (data.location === 'rooms') {
+        console.log(data);
+        $('#' + data.id).parents().parents().children().eq(1).text(data.places);
+        $('#' + data.id).addClass('disabled');
+        $('#' + data.id).text('Занято');
+    }
 }
 

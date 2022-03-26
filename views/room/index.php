@@ -3,16 +3,26 @@
 /** @var yii\web\View $this */
 
 $this->title = 'Семестр 6';
+$choice1 = "";
+$choice2 = "";
+if ($data[0]['first_choice'] == 1) {
+    $choice1 = ' disabled style="background-color: red"';
+}
+if ($data[0]['second_choice'] == 1) {
+    $choice2 = ' disabled style="background-color: red"';
+}
 ?>
 <div class="site-index">
     <div id="wrapper">
-        <div class="unit" id="unit">
+        <button class="unit" id="unit1" <?=$choice1?>>
 
-        </div>
-        <div class="unit" id="unit">
+        </button>
+        <button class="unit" id="unit2" <?=$choice2?>>
 
-        </div>
+        </button>
     </div>
 
 </div>
-<script src="/js/game.js"></script>
+<?php $this->registerJsFile('@web/js/game.js', [
+    'depends' => 'yii\web\YiiAsset',
+]); ?>

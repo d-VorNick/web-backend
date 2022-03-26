@@ -10,8 +10,12 @@ use yii\web\Controller;
 
 class RoomController extends Controller
 {
-    public function actionIndex() {
-        return $this->render('index');
+    public function actionIndex($id) {
+        $model = new RoomService();
+        $data = $model->getRoom($id);
+        return $this->render('index', [
+            'data' => $data,
+        ]);
     }
 
     public function actionTakePlace() {
@@ -33,5 +37,20 @@ class RoomController extends Controller
             return $this->asJson(['room' => $room]);
         }
     }
+
+    public function actionMakeChoice() {
+        $request = Yii::$app->request->get();
+        $model = new RoomService();
+        $model->makeChoice($request['room'], $request['id']);
+        return true;
+    }
+
+    public function actionClearRoom() {
+        $request = Yii::$app->request->get();
+        $model = new RoomService();
+        $model->clearRoom($request['room']);
+        return true;
+    }
+
 
 }
