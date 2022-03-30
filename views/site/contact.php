@@ -37,11 +37,6 @@ $this->title = 'Игра';
         ?>
 
     </div>
-    <div id="wrapper">
-        <div class="unit" id="unit">
-
-        </div>
-    </div>
 </div>
 <?php $this->registerJsFile('@web/js/rooms.js', [
     'depends' => 'yii\web\YiiAsset',

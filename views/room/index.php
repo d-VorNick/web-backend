@@ -13,14 +13,24 @@ if ($data[0]['second_choice'] == 1) {
 }
 ?>
 <div class="site-index">
-    <div id="wrapper">
+    <?php /*<div id="wrapper">
         <button class="unit" id="unit1" <?=$choice1?>>
 
         </button>
         <button class="unit" id="unit2" <?=$choice2?>>
 
         </button>
+    </div> */?>
+    <h1 class="mid-h1" id="mid-h1">Выберите динозавра!</h1>
+    <div class="game">
+        <button id="unit1" class="unit dino"></button>
+        <div id="cactus" class="cactus"></div>
     </div>
+    <div class="game">
+        <button id="unit2" class="unit dino"></button>
+        <div id="cactus2" class="cactus"></div>
+    </div>
+
 
 </div>
 <?php $this->registerJsFile('@web/js/game.js', [
