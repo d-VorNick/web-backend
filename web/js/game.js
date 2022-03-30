@@ -2,9 +2,6 @@ const bodyElement = document.getElementById('wrapper');
 const u1 = document.getElementById('unit1');
 const u2 = document.getElementById('unit2');
 
-
-//const unit = document.getElementById('unit1');
-
 //const ws = new WebSocket('wss://web-server-sem2:8443');
 const ws = new WebSocket('ws://localhost:8443');
 
@@ -13,9 +10,6 @@ $.fn.hasAttr = function(name) {
 };
 
 $('.unit').click(function (e) {
-
-    //$(this).css('background-color', 'red');
-    //$(this).prop("disabled",true);
     $(this).addClass('move');
 
     let id;
@@ -71,28 +65,6 @@ document.addEventListener('keyup', event => {
     let unit = $('.move');
     unit.css('top', unit.css('top') ? unit.css('top') : 0);
     unit.css('left', unit.css('left') ? unit.css('left') : 0);
-    let top = unit.css('top');
-    let left = unit.css('left');
-    const step = 5;
-
-
-    /* Для кружков
-    if (event.code === 'ArrowUp') {
-        unit.css('top', parseInt(top) - step + 'px');
-    } else if (event.code === 'ArrowDown') {
-        unit.css('top', parseInt(top) + step + 'px');
-    } else if (event.code === 'ArrowLeft') {
-        unit.css('left', parseInt(left) - step + 'px');
-    } else if (event.code === 'ArrowRight') {
-        unit.css('left', parseInt(left) + step + 'px');
-    }
-
-    let positionData = {
-        top: unit.css('top'),
-        left: unit.css('left'),
-        side: unit.attr('id'),
-        location: location.pathname.split('/')[2]
-    };*/
 
     if (event.code === 'ArrowUp') {
         jump(unit);
@@ -123,11 +95,6 @@ $(window).on('beforeunload', function () {
 });
 
 function sleep(ms) {
-    /*const date = Date.now();
-    let curDate = null;
-    do {
-        curDate = Date.now();
-    } while (curDate - date < ms);*/
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
@@ -144,13 +111,6 @@ function prepare() {
                         .then(() => { h.text('Игра!'); })
                 })
         })
-    /*sleep(1000);
-    h.text('2');
-    sleep(1000);
-    h.text('1');
-    sleep(1000);
-    h.text('Игра!');
-    sleep(1000);*/
 }
 
 function prepareSrv() {
@@ -211,25 +171,11 @@ ws.onmessage = response => {
         console.log(positionData);
         alert('Противник вышел!');
         window.location.pathname = '/contact';
-        /*$.ajax({
-            method: 'GET',
-            url: '/room/clear-room',
-            data: {
-                'room': location.pathname.split('/')[2]
-            },
-            dataType: 'json'
-        }).done(function(response) {
-            alert('Противник вышел, вы победили');
-            window.location.pathname = '/contact';
-        });*/
     }
     console.log(positionData);
     if (positionData.location !== 'rooms' && positionData.location === location.pathname.split('/')[2]) {
         console.log(positionData);
         let opponent = $('#' + positionData.side)
-        /* Для кружков
-        opponent.css('top', positionData.top);
-        opponent.css('left', positionData.left);*/
         jump(opponent);
     }
 }
@@ -255,8 +201,6 @@ let isAlive = setInterval( function () {
             msg: 'Ничья!'
         }
         ws.send(JSON.stringify(data));
-        //alert("Ничья!");
-        //window.location.pathname = '/contact';
     } else {
 
         if (cactusLeft < 50 && cactusLeft > 0 && dino1Top >= 144) {
@@ -265,23 +209,14 @@ let isAlive = setInterval( function () {
                 msg: 'Победил нижний игрок!'
             }
             ws.send(JSON.stringify(data));
-            //alert("Победил нижний игрок!");
-            //window.location.pathname = '/contact';
         }
         if (cactusLeft < 50 && cactusLeft > 0 && dino2Top >= 144) {
             let data = {
                 finished: location.pathname.split('/')[2],
                 msg: 'Победил верхний игрок!'
             }
-
             ws.send(JSON.stringify(data));
-            //alert("Победил верхний игрок!");
-            //window.location.pathname = '/contact';
         }
     }
 
 }, 10)
-
-ws.onclose = () => {
-
-}

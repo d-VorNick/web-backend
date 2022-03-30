@@ -52,5 +52,36 @@ ws.onmessage = response => {
         $('#' + data.id).addClass('disabled');
         $('#' + data.id).text('Занято');
     }
+    if ('disconnect' in data) {
+        let id1;
+        let id2;
+        switch (data.disconnect) {
+            case '1':
+                id1 = $('#1');
+                id2 = $('#2');
+                activateBtn(id1, id2);
+                break;
+
+            case '2':
+                id1 = $('#3');
+                id2 = $('#4');
+                activateBtn(id1, id2);
+                break;
+
+            case '3':
+                id1 = $('#5');
+                id2 = $('#6');
+                activateBtn(id1, id2);
+                break;
+        }
+    }
+}
+
+function activateBtn(id1, id2) {
+    id1.text('Игрок 1');
+    id1.removeClass('disabled');
+    id2.text('Игрок 2');
+    id2.removeClass('disabled');
+    id2.parents().parents().children().eq(1).text('Свободных мест: 2');
 }
 
