@@ -29,7 +29,7 @@ class SignupForm extends Model
 
     public function register() {
         $pass = md5($this->password);
-        $q = "INSERT user(username, password) 
+        $q = "INSERT into users(username, password) 
               VALUES ('{$this->username}', '{$pass}');";
         try {
             Yii::$app->db->createCommand($q)->execute();
@@ -39,7 +39,7 @@ class SignupForm extends Model
     }
 
     public function checkLogin() {
-        $q = "SELECT username FROM user WHERE username='{$this->username}';";
+        $q = "SELECT username FROM users WHERE username='{$this->username}';";
         try {
             return Yii::$app->db->createCommand($q)->execute();
         } catch (\Exception $e) {

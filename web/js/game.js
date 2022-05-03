@@ -55,6 +55,7 @@ $('.unit').click(function (e) {
 
     ws.send(JSON.stringify(data));
     if (prep) {
+
         prepareSrv();
     }
 });
@@ -135,23 +136,24 @@ ws.onmessage = response => {
     let positionData = JSON.parse(response.data);
 
     if ('ready' in positionData && positionData.location === location.pathname.split('/')[2]) {
-        console.log(positionData);
         let unit = {};
         if (positionData.ready === 'cactus') {
             unit = $('#unit1');
             if (unit.hasAttr('disabled')) {
+                unit.css('filter', 'brightness(0.1)');
                 prepareSrv();
-
             } else {
                 unit.prop("disabled", true);
+                unit.css('filter', 'brightness(0.1)');
             }
         } else {
             unit = $('#unit2');
             if (unit.hasAttr('disabled')) {
+                unit.css('filter', 'brightness(0.1)');
                 prepareSrv();
-
             } else {
                 unit.prop("disabled", true);
+                unit.css('filter', 'brightness(0.1)');
             }
         }
     }
@@ -168,13 +170,10 @@ ws.onmessage = response => {
     }
 
     if ('disconnect' in positionData && positionData.disconnect === location.pathname.split('/')[2]) {
-        console.log(positionData);
         alert('Противник вышел!');
         window.location.pathname = '/contact';
     }
-    console.log(positionData);
     if (positionData.location !== 'rooms' && positionData.location === location.pathname.split('/')[2]) {
-        console.log(positionData);
         let opponent = $('#' + positionData.side)
         jump(opponent);
     }

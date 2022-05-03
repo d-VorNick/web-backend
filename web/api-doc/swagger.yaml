@@ -1,0 +1,126 @@
+openapi: 3.0.0
+info:
+  title: 'Web Semester 6'
+  version: '0.1'
+tags:
+  -
+    name: Site Controller
+  -
+    name: Room Controller
+paths:
+  /site/login:
+    post:
+      operationId: 0e6ee86b2507b85475c45d4fe785210a
+      tags:
+        - Site Controller
+      parameters:
+        -
+          name: username
+          in: formData
+          description: 'Имя пользователя'
+          required: true
+          type : 'string'
+        -
+          name: password
+          in: formData
+          description: 'Пароль'
+          required: true
+          type: 'string'
+        -
+          name: rememberMe
+          in: formData
+          description: 'Запомнить меня'
+          required: true
+          type: 'bool'
+      responses:
+          '400':
+            description: 'Неверные введенные данные'
+          '200':
+            description: 'Успешно залогинились'
+
+  /room/take-place:
+    get:
+      operationId: take-place
+      tags:
+        - Room Controller
+      description: 'Делает выбор комнаты и возвращает ее ID'
+      parameters:
+        -
+          name: id
+          in: query
+          required: true
+      responses:
+        200:
+          description: 'Вернется ID комнаты'
+        400:
+          description: 'Вернется пустой массив'
+
+  /room/make-choice:
+    get:
+      operationId: make-choice
+      tags:
+        - Room Controller
+      description: 'Делает выбор динозавра и возвращает кол-во обработанных строк в БД'
+      parameters:
+        -
+          name: id
+          in: query
+          required: true
+        -
+          name: room
+          in: query
+          required: true
+      responses:
+        200:
+          description: 'Вернется кол-во обработанных строк'
+
+  /room/clear-room:
+    get:
+      operationId: clear-room
+      tags:
+        - Room Controller
+      description: 'Очищает все комнаты и возвращает кол-во обработанных строк в БД'
+      parameters:
+        - name: room
+          in: query
+          required: true
+      responses:
+        200:
+          description: 'Вернется кол-во обработанных строк'
+
+  /site/open-signup:
+    get:
+      operationId: open-signup-modal
+      description: 'Открывает модальное окно регистрации'
+      tags:
+        - Site Controller
+      responses:
+        200:
+          description: 'Вернется HTML'
+        400:
+          description: 'Вернется false'
+
+    post:
+      operationId: open-signup
+      tags:
+        - Site Controller
+      parameters:
+        - name: _csrf
+          in: path
+          required: true
+        - name: username
+          in: formData
+          description: 'Имя пользователя'
+          required: true
+          type: 'string'
+        - name: password
+          in: formData
+          description: 'Пароль'
+          required: true
+          type: 'string'
+      responses:
+        '400':
+          description: 'Неверные введенные данные'
+        '200':
+          description: 'Успешно залогинились'
+

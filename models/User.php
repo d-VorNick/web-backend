@@ -16,7 +16,7 @@ class User extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 
     public static function tableName()
     {
-        return 'user';
+        return 'users';
     }
 
     public function rules()

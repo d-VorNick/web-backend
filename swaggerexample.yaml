@@ -1,0 +1,32 @@
+openapi: 3.0.0
+info:
+  title: 'Web Semester 6'
+  version: '0.1'
+paths:
+  /site/login:
+    post:
+      operationId: 0e6ee86b2507b85475c45d4fe785210a
+      parameters:
+        -
+          name: username
+          in: formData
+          description: 'ID of pet that needs to be updated'
+          required: true
+          type : 'string'
+        -
+          name: password
+          in: formData
+          description: 'Updated name of the pet'
+          required: true
+          type: 'string'
+        -
+          name: rememberMe
+          in: formData
+          description: 'Запомнить меня'
+          required: true
+          type: 'bool'
+      responses:
+          '405':
+            description: 'Неверные введенные данные'
+          '200':
+            description: 'Успешно залогинились'

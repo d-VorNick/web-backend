@@ -102,6 +102,36 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
+    /**
+     * @OA\Info(title="Web Semester 6", version="0.1")
+     */
+
+    /**
+     * @OA\Post(
+     *     path="/site/login",
+     *     @OA\Parameter(
+     *        in = "path",
+     *        name = "username",
+     *        description = "Имя пользователя",
+     *        required = true,
+     *    ),
+     *    @OA\Parameter(
+     *        in = "path",
+     *        name = "password",
+     *        description = "Пароль",
+     *        required = true,
+     *    ),
+     *    @OA\Parameter(
+     *        in = "path",
+     *        name = "rememberMe",
+     *        description = "Запомнить меня",
+     *        required = true,
+     *    ),
+     *
+     *     @OA\Response(response="200", description="Успешный логин"),
+     *     @OA\Response(response="400", description="Неверно введены данные")
+     * )
+     */
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {

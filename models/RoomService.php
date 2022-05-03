@@ -23,7 +23,7 @@ class RoomService
 
     public function getData()
     {
-        $q = "SELECT * FROM rooms;";
+        $q = "SELECT * FROM rooms order by id;";
         $result = Yii::$app->db->createCommand($q)->queryAll();
         return $result;
     }
