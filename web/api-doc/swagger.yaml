@@ -10,7 +10,8 @@ tags:
 paths:
   /site/login:
     post:
-      operationId: 0e6ee86b2507b85475c45d4fe785210a
+      operationId: login
+      description: 'Вход пользователя на сайт с помощью логина и пароля'
       tags:
         - Site Controller
       parameters:
@@ -37,6 +38,29 @@ paths:
             description: 'Неверные введенные данные'
           '200':
             description: 'Успешно залогинились'
+
+    get:
+      operationId: login-redirect
+      description: 'Открывается страница со входом и регистрацией'
+      tags:
+        - Site Controller
+      responses:
+        200:
+          description: 'Вернется HTML'
+        404:
+          description: 'Вернется сообщение об ошибке'
+
+  /site/logout:
+    post:
+      operationId: logout
+      tags:
+        - Site Controller
+      description: 'Разлогинивание пользователя'
+      responses:
+        200:
+          description: 'Произойдет редирект на страницу со входом и регистрацией'
+        404:
+          description: 'Вернется сообщение об ошибке'
 
   /room/take-place:
     get:
@@ -102,12 +126,10 @@ paths:
 
     post:
       operationId: open-signup
+      description: 'Регистрация пользователя на сайте'
       tags:
         - Site Controller
       parameters:
-        - name: _csrf
-          in: path
-          required: true
         - name: username
           in: formData
           description: 'Имя пользователя'
@@ -120,7 +142,42 @@ paths:
           type: 'string'
       responses:
         '400':
-          description: 'Неверные введенные данные'
+          description: 'Неверны введенные данные'
         '200':
-          description: 'Успешно залогинились'
+          description: 'Успешно зарегистрировались'
 
+  /site/index:
+    get:
+      operationId: index
+      description: 'Открывается главная страница'
+      tags:
+        - Site Controller
+      responses:
+        200:
+          description: 'Вернется HTML'
+        404:
+          description: 'Вернется сообщение об ошибке'
+
+  /site/about:
+    get:
+      operationId: about
+      description: 'Открывается страница со списком лабораторных работ, сделанных для создания игры'
+      tags:
+        - Site Controller
+      responses:
+        200:
+          description: 'Вернется HTML'
+        404:
+          description: 'Вернется сообщение об ошибке'
+
+  /site/contact:
+    get:
+      operationId: contact
+      description: 'Открывается страница с лобби игры'
+      tags:
+        - Site Controller
+      responses:
+        200:
+          description: 'Вернется HTML'
+        404:
+          description: 'Вернется сообщение об ошибке'
